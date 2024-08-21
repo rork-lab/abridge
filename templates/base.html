@@ -178,5 +178,11 @@
 {%- endblock footer %}
 {%- block gotop %}
 {%- endblock gotop %}
+
+  {% if config.extra.chart.enabled %}
+  <script src="{{ get_url(path='js/chart.js') }}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.xkcd@1/dist/chart.xkcd.min.js" crossorigin="anonymous"></script>
+  {% endif %}
+  
 </body>
 </html>
