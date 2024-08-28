@@ -19,8 +19,10 @@ This post covers the **imgswap and img shortcodes**. Images can also be embedded
 # img Shortcode
 
 - src is the path and filename of the image. (mandatory)
-- class sets a class for the image. (optional)
+- class sets a class for the image.
 - alt sets the alt note for the image.
+- caption sets the caption text below the image.
+- link sets a hyperlink for the image.
 - w is the width of the image.
 - h is the height of the image.
 
@@ -29,28 +31,29 @@ Optional Classes:
 - ci can be used to center the image.
 - fr can be used to float the image right.
 - fl can be used to float the image left.
+- b1 can be used to add a 1px border.
 
 ** google lighthouse recommends setting alt, w, and h attributes. If alt is omitted then the filename is used. If w or h are omitted then get_image_metadata() fills these values. **
 
 ## Usage (same path)
 ```rs
-{{/* img(src="ferris-happy.svg" class="ci" alt="Ferris is Happy") */}}
+{{/* img(src="ferris-happy.svg" class="ci b1" alt="Ferris is Happy" caption="Ferris" link="https://www.rust-lang.org/") */}}
 ```
 **Output**
 ```html
-{{ img(src="ferris-happy.svg" class="ci" alt="Ferris is Happy") }}
+{{ img(src="ferris-happy.svg" class="ci b1" alt="Ferris is Happy" caption="Ferris" link="https://www.rust-lang.org/") }}
 ```
-{{ img(src="ferris-happy.svg" class="ci" alt="Ferris is Happy") }}
+{{ img(src="ferris-happy.svg" class="ci b1" alt="Ferris is Happy" caption="Ferris" link="https://www.rust-lang.org/") }}
 
 ## Usage (relative path ./)
 ```rs
-{{/* img(src="./img/ferris-gesture.svg" alt="Ferris says Hello") */}}
+{{/* img(src="./img/ferris-gesture.svg" alt="Ferris says Hello" caption="Ferris" link="https://www.rust-lang.org/") */}}
 ```
 **Output**
 ```html
-{{ img(src="./img/ferris-gesture.svg" alt="Ferris says Hello") }}
+{{ img(src="./img/ferris-gesture.svg" alt="Ferris says Hello" caption="Ferris" link="https://www.rust-lang.org/") }}
 ```
-{{ img(src="./img/ferris-gesture.svg" alt="Ferris says Hello") }}
+{{ img(src="./img/ferris-gesture.svg" alt="Ferris says Hello" caption="Ferris" link="https://www.rust-lang.org/") }}
 
 ## Usage (root path /)
 ```rs
@@ -77,8 +80,10 @@ When you hover your mouse over the image it will display the image to compare.
 
 - main_src is the path and filename for the default image. (mandatory)
 - swap_src is the path and filename for the swap image. (mandatory)
-- class sets a class for the image. (optional)
+- class sets a class for the image.
 - alt sets the alt note for the image.
+- caption sets the caption text below the image.
+- link sets a hyperlink for the image.
 - w is the width of the image.
 - h is the height of the image.
 
