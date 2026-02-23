@@ -31,19 +31,30 @@
 {%- endblock seo %}
 
 {%- block comments_init %}
-  {%- if config.extra.comments.hyvor %}
+  {%- if not config.extra.comment_system or config.extra.comment_system == "hyvor" and config.extra.comments.hyvor %}
   <script defer src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
+  {%- elif config.extra.comment_system == "remark42" and config.extra.comments.remark42 %}
+  <script>
+	var remark_config = {
+		host: "{{ config.extra.comments.remark42 | safe }}",
+		site_id: "{{ config.extra.comments.remark42_site_id }}",
+	}
+  </script>
+  <script>!function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);</script>
   {%- endif %}
 {%- endblock comments_init %}
 
 {%- block content %}
     <article>
+
+    {%- block page_header %}
     {{- macros::title_post(page=page, config=config) }}
 
     {%- if config.extra.meta_post.position %}
     {%- if config.extra.meta_post.position == "top" or config.extra.meta_post.position == "both" %}
     {{- macros::meta_post(page=page, config=config) }}
     {%- endif %}{%- endif %}
+    {%- endblock page_header %}
 
     {# In Page Series Navigation #}
     {%- if config.extra.series | default(value=true) %}
@@ -87,8 +98,12 @@
     {%- endblock page_footer %}
 
     {%- block comments_body %}
+    {%- if not config.extra.comment_system or config.extra.comment_system == "hyvor" %}
     {%- if config.extra.comments.hyvor %}
     <hyvor-talk-comments website-id={{ config.extra.comments.hyvor }} page-id={{ page.slug }}{%- if config.extra.comments.hyvorcolor %} colors="{{ config.extra.comments.hyvorcolor }}"{%- endif %}></hyvor-talk-comments>
+    {%- endif %}
+    {%- elif config.extra.comment_system == "remark42" and config.extra.comments.remark42 %}
+    <div id="remark42"></div>
     {%- endif %}
     {%- endblock comments_body %}
     </article>
